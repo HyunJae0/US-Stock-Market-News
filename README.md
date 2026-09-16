@@ -123,7 +123,7 @@ J=0.394  among other stocks,      plug power fell 5.8% before the bell, as morga
 각 문장을 tokenizer를 이용해 token sequence로 변환한 뒤, 두 token sequence 사이의 edit distance를 계산하였다.
 이후 문장 길이의 차이를 보정하기 위해 edit distance를 두 sequence 중 더 긴 길이로 정규화하고, 이를 1에서 뺀 normalized edit similarity를 사용하였다.
 
-$$\operatorname{EditSim}(x_i,x_j)=1-\frac{\operatorname{EditDistance}(x_i,x_j)}{\max(|x_i|,|x_j|)}$$
+$$\text{EditSim}(x_i,x_j)=1-\frac{\text{EditDistance}(x_i,x_j)}{\max(|x_i|,|x_j|)}$$
 
 candidates 중 edit similarity가 0.8을 초과하는 경우에만 near-duplicate로 판정하였다. near-duplicate로 판정된 문장 pair를 edge로 연결하여 graph를 구성한 뒤, 각 connected component를 하나의 duplicate group으로 간주하였다. 각 group에서는 데이터의 원래 순서를 기준으로 가장 먼저 등장한 문장 하나만 유지하고, 나머지 문장은 제거하였다.
 
@@ -207,7 +207,7 @@ nput을 $X$라고 하면, $K=XW_K, V=XW_V$로 계산된다.
 
 그러므로 $K$와 $V$를 모두 저장하는 standard KV-cache 대신 K-cache만 유지하면 된다. 이론적으로 MHA 대비 KV-cache를 2배 줄일 수 있다. 이 방식을 decoder self-attention에 적용한다. 
 
-> 이 변환은 standard attention과 수학적으로 동일하므로 별도의 retraining이나 accuracy loss를 요구하지 않는다. generate phase에서는 $V$를 다시 계산하기 때문에 standard KV-cache 방식보다 추가 computation이 발생할 수 있다. 그러나 Slim Attention은 $\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)(KW_{KV})$를 $\left[\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)K\right]W_{KV}$로 재배치하여 계산한다. 이를 통해 V-cache에 대한 memory read를 제거하면서 추가 연산을 줄일 수 있다.
+> 이 변환은 standard attention과 수학적으로 동일하므로 별도의 retraining이나 accuracy loss를 요구하지 않는다. generate phase에서는 $V$를 다시 계산하기 때문에 standard KV-cache 방식보다 추가 computation이 발생할 수 있다. 그러나 Slim Attention은 $\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)(KW_{KV})$를 $\left[\text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)K\right]W_{KV}$로 재배치하여 계산한다. 이를 통해 V-cache에 대한 memory read를 제거하면서 추가 연산을 줄일 수 있다.
 
 ---
 
