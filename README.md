@@ -291,7 +291,7 @@ BERT-base와 FinBERT는 세 class 모두에서 0.88–0.92 수준의 높은 대�
 아래 그림과 표는 fine-tuning에 사용하는 Yahoo data의 양을 2%에서 100%까지 늘렸을 때 Test Accuracy가 어떻게 변하는지 보여준다. 
 
 <p align="center">
-  <img src="./img/fig05_data_fraction" width="600">
+  <img src="./img/fig05_data_fraction.png" width="600" height="600">
 </p>
 
 | Fine-tuning Data Fraction | Training Sentences | Fin-BB (random init) Test Accuracy | Fin-BB Test Accuracy | Accuracy Gap (p.p.) |
@@ -327,7 +327,7 @@ BERT-base와 FinBERT는 세 class 모두에서 0.88–0.92 수준의 높은 대�
 #### 8.3.1 N-gram Overlap 
 
 <p align="center">
-  <img src="./img/fig10_ngram_overlap" width="600">
+  <img src="./img/fig10_ngram_overlap.png" width="600">
 </p>
 
 
@@ -338,7 +338,7 @@ fine-tuning corpus에서 pre-training corpus와 완전히 일치하는 문장은
 Bloomberg corpus는 article-level data이고 Yahoo corpus는 sentence-level data이므로, 두 corpus를 동일한 단위에서 분포를 비교하기 위해 Bloomberg article을 개별 sentence로 분리하였다.
 
 <p align="center">
-  <img src="./img/fig08_sentence_length" width="700" height="500">
+  <img src="./img/fig08_sentence_length.png" width="700" height="500">
 </p>
 
 그 결과 Bloomberg의 평균 sentence length는 24.82 words, Yahoo는 25.77 words로 약 0.95 word의 차이만 나타났다. median 역시 각각 23 words와 24 words였으며, 75th, 90th, 95th, 99th percentile에서도 두 corpus의 차이는 대부분 0–1 word 수준이었다. 이는 두 corpus가 수집 시기와 source는 다르지만, sentence length라는 surface-level characteristic에서는 매우 유사한 분포를 가진다는 것을 보여준다.
@@ -350,7 +350,7 @@ Bloomberg corpus는 article-level data이고 Yahoo corpus는 sentence-level data
 Yahoo fine-tuning 문장을 tokenization한 다음, 각 token이 Bloomberg pre-training corpus에 몇 번 등장했는지 확인한다. 
 
 <p align="center">
-  <img src="./img/fig09_token_coverage" width="600">
+  <img src="./img/fig09_token_coverage.png" width="600">
 </p>
 
 fine-tuning corpus에서 등장한 토큰을 기준으로 pre-training corpus에서의 등장 빈도를 확인한 결과, 99.99%의 token occurrence가 Bloomberg pre-training corpus에서 최소 한 번 이상 관측된 토큰으로 구성되어 있었다. 즉, Yahoo 전체 token occurrence 중 99.991%는 Bloomberg에서 적어도 한 번 이상 등장한 토큰이다. 또한 86.75%는 Bloomberg에서 1,000번 이상 등장한 토큰이다.
@@ -366,7 +366,7 @@ fine-tuning corpus에서 등장한 토큰을 기준으로 pre-training corpus에
 분석에는 Bloomberg의 1,957,729개 sentence와 Yahoo의 21,888개 sentence를 사용하였다. 각 sentence를 whitespace 기준으로 word 단위로 분리하고 punctuation을 정리한 뒤, English stopword를 제거하였다. 두 corpus를 합쳐 20회 미만 등장한 word는 제외하였으며, 최종적으로 50,595개 word를 비교하였다.
 
 <p align="center">
-  <img src="./img/fig11_log_odds" width="700" height="500">
+  <img src="./img/fig11_log_odds.png" width="700" height="500">
 </p>
 
 그림의 x축은 Bloomberg와 Yahoo를 합쳤을 때 total word frequency를 log scale로 나타내며, y축은 Yahoo와 Bloomberg 사이의 상대적인 word usage difference를 나타내는 z-score이다. positive z-score는 해당 word가 Yahoo에서 상대적으로 더 자주 사용됨을, negative z-score는 Bloomberg에서 상대적으로 더 자주 사용됨을 의미한다. 0에 가까울수록 두 corpus에서의 상대적 사용 비율 차이가 작다.
@@ -388,7 +388,7 @@ corpus size에 따른 영향을 줄이기 위해 Bloomberg sentence를 Yahoo와 
 비교를 위해 Yahoo corpus 내부에서 자기 자신을 제외한 다른 Yahoo 문장 중 가장 유사한 top-3 및 top-5 문장을 찾고 이들의 평균 cosine similarity를 baseline으로 사용한다.
 
 <p align="center">
-  <img src="./img/fig12_topk_similarity" width="600" height="500">
+  <img src="./img/fig12_topk_similarity.png" width="600" height="500">
 </p>
 
 Bloomberg pre-training corpus와 비교했을 때 평균 similarity는 top-3에서 0.529, top-5에서 0.515였다. 반면 Yahoo corpus 내부에서 자기 자신을 제외하고 가장 가까운 문장을 찾은 within-corpus baseline은 각각 0.621, 0.600이었다.
