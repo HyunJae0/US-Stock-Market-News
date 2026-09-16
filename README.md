@@ -207,7 +207,7 @@ nput을 $X$라고 하면, $K=XW_K, V=XW_V$로 계산된다.
 
 그러므로 $K$와 $V$를 모두 저장하는 standard KV-cache 대신 K-cache만 유지하면 된다. 이론적으로 MHA 대비 KV-cache를 2배 줄일 수 있다. 이 방식을 decoder self-attention에 적용한다. 
 
-> 이 변환은 standard attention과 수학적으로 동일하므로 별도의 retraining이나 accuracy loss를 요구하지 않는다. generate phase에서는 $V$를 다시 계산하기 때문에 standard KV-cache 방식보다 추가 computation이 발생할 수 있다. 그러나 Slim Attention은 $\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)(KW_{KV})$를 $\left[\text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)K\right]W_{KV}$로 재배치하여 계산한다. 이를 통해 V-cache에 대한 memory read를 제거하면서 추가 연산을 줄일 수 있다.
+> 이 변환은 standard attention과 수학적으로 동일하므로 별도의 retraining이나 accuracy loss를 요구하지 않는다. generate phase에서는 $V$를 다시 계산하기 때문에 standard KV-cache 방식보다 추가 computation이 발생할 수 있다. 그러나 Slim Attention은 $\text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)(KW_{KV})$를 $\left[\text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)K\right]W_{KV}$로 재배치하여 계산한다. 이를 통해 V-cache에 대한 memory read를 제거하면서 추가 연산을 줄일 수 있다.
 
 ---
 
