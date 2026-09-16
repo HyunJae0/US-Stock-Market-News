@@ -23,7 +23,7 @@ pre-training에 사용하는 Bloomberg data의 날짜 metadata는 **2006년 10�
 
 
 또한 Fin-BB를 BERT, FinBERT와 비교한다.
-|  | **Fin-BB (ours)** | **BERT-base** | **FinBERT-pretrain** |
+|  | **Fin-BB** | **BERT-base** | **FinBERT-pretrain** |
 |---|---|---|---|
 | **Pre-training corpus** | Bloomberg financial news | BookCorpus + English Wikipedia | Corporate Reports (10-K/10-Q) + Earnings Call Transcripts + Analyst Reports |
 | **Financial-domain specific** | **Yes** | No | **Yes** |
@@ -358,24 +358,6 @@ fine-tuning corpus에서 등장한 토큰을 기준으로 pre-training corpus에
 앞선 n-gram overlap 분석에서는 두 corpus 사이의 직접적인 content overlap이 매우 제한적으로 나타난 반면, token-level 분석에서는 대부분의 fine-tuning token이 pre-training corpus에서 이미 충분히 관측된 것으로 나타났다. 즉, 두 corpus는 동일한 문장이나 긴 표현을 직접적으로 공유하는 정도는 낮지만, financial news를 구성하는 lexical basis는 상당 부분 공유하고 있다.
 
 이러한 결과는 Fin-BB의 성능 향상이 동일한 문장의 직접적인 memorization보다는, pre-training 과정에서 반복적으로 접한 financial-domain vocabulary와 표현을 downstream task에서 활용했을 가능성을 보여준다.
-
-#### 8.3.4 Lexical Comparison using Log-Odds Ratio
-
-두 corpus가 공유하는 vocabulary 안에서도 단어의 사용 비율에는 차이가 존재할 수 있으므로, Bloomberg와 Yahoo에서 상대적으로 더 자주 사용되는 단어를 비교하였다. 단순 frequency를 통한 비교는 두 corpus의 크기 차이에 크게 영향을 받기 때문에, informative Dirichlet prior를 적용한 log-odds ratio를 사용하였다. 이 방법은 corpus별 word frequency의 상대적 차이를 비교하면서 rare word에 의한 불안정성을 완화하며, 각 단어의 차이를 z-score로 나타낸다.
-
-분석에는 Bloomberg의 1,957,729개 sentence와 Yahoo의 21,888개 sentence를 사용하였다. 각 sentence를 whitespace 기준으로 word 단위로 분리하고 punctuation을 정리한 뒤, English stopword를 제거하였다. 두 corpus를 합쳐 20회 미만 등장한 word는 제외하였으며, 최종적으로 50,595개 word를 비교하였다.
-
-<p align="center">
-  <img src="./img/fig11_log_odds.png" width="700" height="500">
-</p>
-
-그림의 x축은 Bloomberg와 Yahoo를 합쳤을 때 total word frequency를 log scale로 나타내며, y축은 Yahoo와 Bloomberg 사이의 상대적인 word usage difference를 나타내는 z-score이다. positive z-score는 해당 word가 Yahoo에서 상대적으로 더 자주 사용됨을, negative z-score는 Bloomberg에서 상대적으로 더 자주 사용됨을 의미한다. 0에 가까울수록 두 corpus에서의 상대적 사용 비율 차이가 작다.
-
-Yahoo에서 상대적으로 두드러진 word에는 `2023`, `2024`, 요일 표현인 `wednesday`, `thursday`, `friday`와 함께 `ai`, `fed`, `inflation`, `rates`, `reuters` 등이 포함되었다. Yahoo corpus가 2023년 12월에 수집되었다는 점을 고려하면, 연도와 요일 표현은 collection period의 차이를 반영하는 것으로 볼 수 있다. 또한 `ai`, `fed`, `inflation`과 같은 단어의 상대적 증가는 해당 시기에 다뤄진 financial topics의 차이가 반영되었을 가능성이 있다.
-
-반면 Bloomberg에서는 `percent`, `million`, `said`, `according`, `interview`, `bloomberg`, `yesterday` 등의 word가 상대적으로 더 많이 나타났다. 이러한 차이는 단순한 financial domain의 차이라기보다 news source의 writing style, 표현 방식, collection period 및 당시 다뤄진 topic의 차이가 함께 반영된 결과로 해석할 수 있다.
-
-수집 시기와 기사 출처의 차이로 인해 상대적으로 자주 사용하는 단어에는 차이가 있다. 다만, 이 사실만으로 전체 어휘가 크게 다르다고 결론 내릴 수 없다. 
 
 #### 8.3.4 Semantic Similarity
 
