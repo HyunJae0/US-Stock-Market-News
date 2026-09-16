@@ -1,8 +1,8 @@
 ## 1. 프로젝트 개요
 
-프로젝트의 목표는 
 
-미국 증시 관련 뉴스 문장을 입력받아, 문장에 나타난 시장 방향성을 **bullish(강세), neutral(중립), bearish(약세)**의 세 범주로 분류하는 SLM을 구축하고, financial news만을 사용해 pretrained model이 동일한 도메인의 sentence classification 성능에 미치는 영향을 분석하여 domain pretraining의 효과를 검증하는 것이다.
+
+프로젝트의 목표는 미국 증시 관련 뉴스 문장을 입력받아, 문장에 나타난 시장 방향성을 **bullish(강세), neutral(중립), bearish(약세)**의 세 범주로 분류하는 SLM을 구축하고, financial news만을 사용해 pretrained model이 동일한 도메인의 sentence classification 성능에 미치는 영향을 분석하여 domain pretraining의 효과를 검증하는 것이다.
 
 stock news는 시간적 맥락에 영향을 받는다. 구체적으로 기업의 실적, 금리, 물가, 투자자의 기대 등은 시간에 따라 변화하며, 뉴스의 의미와 시장에 미치는 영향 역시 이러한 context에 따라 달라질 수 있다. 예를 들어 실적이 증가했다는 사실만으로 시장의 긍정적인 반응을 단정할 수는 없으며, 당시의 기대 수준을 충족했는지까지 고려해야 한다. 
 
