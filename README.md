@@ -34,7 +34,7 @@ pre-training에 사용하는 Bloomberg data의 날짜 metadata는 **2006년 10�
 | **Parameters** | 약 44.9M (encoder + classification head) | 약 110M | 약 110M |
 | **Pre-training amount** | 40 epochs | 1M steps | 1M iterations |
 
-- BERT 원 논문은 corpus를 약 3.3B words로 제시하며, 약 16 GB라는 값은 이를 설명하는 후속 문헌에서 흔히 제시되는 규모이다.
+- BERT 원 논문은 corpus를 약 3.3B words로 제시하며, 약 16 GB라는 값은 이를 설명하는 후속 문헌에서 일반적으로 제시되는 규모이다.
 - FinBERT FinVocab은 original BERT code와 BERT-Base와 동일한 configuration을 사용해 from scratch로 학습되었다. 
 - BERT는 word count, FinBERT는 token count를 기준으로 보고되어 있으며 tokenizer도 서로 다르므로, 이 값을 모델 간 완전히 동일한 단위의 corpus size ratio로 해석해서는 안 된다.
 
