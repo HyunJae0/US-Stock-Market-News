@@ -123,12 +123,7 @@ J=0.394  among other stocks,      plug power fell 5.8% before the bell, as morga
 각 문장을 tokenizer를 이용해 token sequence로 변환한 뒤, 두 token sequence 사이의 edit distance를 계산하였다.
 이후 문장 길이의 차이를 보정하기 위해 edit distance를 두 sequence 중 더 긴 길이로 정규화하고, 이를 1에서 뺀 normalized edit similarity를 사용하였다.
 
-$$
-\operatorname{EditSim}(x_i,x_j)
-=
-1-\frac{\operatorname{EditDistance}(x_i,x_j)}
-{\max(|x_i|,|x_j|)}
-$$
+$$\operatorname{EditSim}(x_i,x_j)=1-\frac{\operatorname{EditDistance}(x_i,x_j)}{\max(|x_i|,|x_j|)}$$
 
 candidates 중 edit similarity가 0.8을 초과하는 경우에만 near-duplicate로 판정하였다. near-duplicate로 판정된 문장 pair를 edge로 연결하여 graph를 구성한 뒤, 각 connected component를 하나의 duplicate group으로 간주하였다. 각 group에서는 데이터의 원래 순서를 기준으로 가장 먼저 등장한 문장 하나만 유지하고, 나머지 문장은 제거하였다.
 
